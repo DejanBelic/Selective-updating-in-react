@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import PageHeader from "./components/PageHeaderPureComponent";
+import PageHeader from "./components/PageHeaderFunc";
 import ItemList from "./components/ItemList";
 
 class App extends Component {
