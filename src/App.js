@@ -1,38 +1,34 @@
-import React, { Component } from 'react';
+import React, {  useState, useMemo } from 'react';
 import './App.css';
 import PageHeader from "./components/PageHeaderFunc";
 import ItemList from "./components/ItemList";
 
-class App extends Component {
-  state = {
-    text: '',
-    items: [],
-  };
+const App = () =>  {
+  const [text, setText] = useState('');
+  const [items, setItems] = useState([]);
 
-  render() {
+  const headerText = "The page";
     return (
         <>
-          <PageHeader
-            headerText="The page"
-          />
-          <ItemList items={this.state.items} />
+          {useMemo(
+              () => <PageHeader headerText={headerText} />,
+              [headerText],
+          )}
+          <ItemList items={items} />
           <form>
             <div>
               <label htmlFor="text-input">Text:</label>
-              <input type="text" id="text-input" value={this.state.text} onChange={e => this.setState({ text: e.target.value})}/>
+              <input type="text" id="text-input" value={text} onChange={e => setText( e.target.value )}/>
             </div>
             <button type="button" onClick={() => {
 
-              this.setState({
-                items: this.state.items.concat(this.state.text),
-                text:'',
-              })
+              setItems(items.concat(text));
+              setText('');
             }}>Add item</button>
           </form>
-          <div>{this.state.text}</div>
+          <div>{text}</div>
       </>
     );
-  }
-}
+};
 
 export default App;
